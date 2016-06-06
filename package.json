@@ -10,8 +10,10 @@
   },
   "author": "Francieli Viane, Lucas Miranda, Marianne Pereira, Thomaz Dias",
   "license": "ISC",
-  },
   "devDependencies": {
     "ajax": "0.0.4"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.5"
   }
 }
