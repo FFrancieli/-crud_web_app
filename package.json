@@ -1,0 +1,17 @@
+{
+  "name": "crud_web_app",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FFrancieli/crud_web_app.git"
+  },
+  "author": "Francieli Viane, Lucas Miranda, Marianne Pereira, Thomaz Dias",
+  "license": "ISC",
+  },
+  "devDependencies": {
+    "ajax": "0.0.4"
+  }
+}
