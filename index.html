@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
     <title>Teste</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="main">
@@ -11,33 +13,23 @@
       <thead>
         <th> Nome</th>
           <th>E-mail</th>
-          <th>Sexo</th>
+          <th>Gênero</th>
           <th>Ações</th>
         </thead>
-        <tbody>
-              <!--
-              Estrutura de repetição para carregar os dados
-            -->
-            <tr>
-              <td>Fulano</td>
-              <td>ful@ano.com</td>
-              <td>M</td>
-              <td>crudz</td>
-            </tr>
-            <tr>
-              <td>Beltrana</td>
-                <td>bel@trana.com</td>
-                <td>F</td>
-                <td>crud</td>
-            </tr>
-            <tr>
-                <td>Beltrana</td>
-                <td>bel@trana.com</td>
-                <td>F</td>
-                <td>crud</td>
-            </tr>
+        <tbody id='content'>
+          <script id="users-template" type="text/template">
+            {{#users}}
+              <tr class="user" id={{_id}}>
+                <td>{{name}}</td>
+                <td>{{email}}</td>
+                <td>{{gender}}</td>
+              </tr>
+            {{/users}}
+            </script>
           </tbody>
         </table>
     </div>
+
+    <script src='js/app.js' type="text/javascript"></script>
   </body>
 </html>
