@@ -13,6 +13,7 @@ $(function(){
 	Crud.prototype.renderList = function () {
 		var template = Handlebars.compile(document.getElementById('users-template').innerHTML);
 		var new_user = this.createUser;
+		var remove_user = this.removeUser;
 		var render = function(data) {
 			var user_list = {
 				users:data
@@ -24,6 +25,10 @@ $(function(){
 			document.getElementById("create").addEventListener('click',
 			function () {
     		new_user();
+			});
+
+			$(".remove").click(function(){
+				remove_user();
 			});
 		}
 
@@ -48,24 +53,45 @@ $(function(){
     }
 
 	Crud.prototype.createUser = function () {
-		var user = new User("Maria 00000000000", 20 , "F", "maria@gmail.com")
-
+		var user = new User("Angélica ", "F", "test@gmail.com")
 		saveUser(user);
-		};
+	};
 
 	var saveUser = function(data) {
+			$.ajax({
+				url:"http://localhost:8181/api/users/",
+				method: "POST",
+				data:data,
+				success: function() {
+					alert("Usuário cadastrado com sucesso");
+					console.log(data);
+				},
+				error: function () {
+					alert("Erro ao cadastrar usuário")
+				}
+		});
+	};
+
+	Crud.prototype.removeUser = function () {
+		var user_id = "57671ef94430e45116a43b50";
+		remove(user_id);
+		//this.makeAjaxRequest("DELETE", undefined, undefined, user_id)
+	};
+
+	var remove = function (id) {
 		$.ajax({
-			url:"http://localhost:8181/api/users",
-			method: "POST",
-			data:data,
+			url:"http://localhost:8181/api/users/" + "57671ef94430e45116a43b50" ,
+			headers: {'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+			 'Access-Control-Allow-Origin': '*',
+			 'Access-Control-Allow-Headers': 'origin, x-requested-with, content-type'
+			},
+			method: "DELETE",
 			success: function() {
-				alert("Usuário cadastrado com sucesso");
-				console.log(data);
+				alert("Usuário removido com sucesso");
 			},
 			error: function () {
-				alert("Erro ao cadastrar usuário")
+				alert("Erro ao remover usuário")
 			}
-
 		});
 	}
 
