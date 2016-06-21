@@ -3,17 +3,23 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
-    <title>Teste</title>
+    <title>CRUD Massa</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
     <script src='js/app.js' type="text/javascript"></script>
 </head>
 <body>
   <div class="main">
-    <button type="button" name="newUSer" id="create">  Novo Usuario </button>
-    <table>
+    <form>
+      <input id="userName" name="name" placeholder="Nome">
+            <input id="userEmail" name="email" placeholder="E-Mail">
+      <input id="userGender" name="gender" placeholder="Gênero">
+      <button type="button" name="newUSer" id="create"> Novo Usuário </button>
+
+    </form>  
+        <table>
       <thead>
-        <th> Nome</th>
+          <th>Nome</th>
           <th>E-mail</th>
           <th>Gênero</th>
           <th>Ações</th>
@@ -28,9 +34,7 @@
                 <td>
                   <button class="remove" id="remove_user-{{_id}}"> Remover </button>
                   <button class="update" id="update_user-{{_id}}"> Atualizar </button>
-                </td>
-
-                  
+                </td>                
               </tr>
             {{/users}}
             </script>

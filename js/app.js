@@ -71,7 +71,10 @@ $(function(){
     }
 
 	Crud.prototype.createUser = function () {
-		var user = new User(prompt("Name"),prompt("Gender"),prompt("Email"))
+		var name = document.getElementById("userName").value;
+		var gender = document.getElementById("userGender").value;
+		var email = document.getElementById("userEmail").value;
+		var user = new User(name, gender, email);
 		saveUser(user);
 	};
 
@@ -83,6 +86,7 @@ $(function(){
 				success: function() {
 					alert("Usuário cadastrado com sucesso");
 					console.log(data);
+					location.reload();
 				},
 				error: function () {
 					alert("Erro ao cadastrar usuário")
@@ -101,6 +105,7 @@ $(function(){
 			method: "DELETE",
 			success: function() {
 				alert("Usuário removido com sucesso");
+				location.reload();
 			},
 			error: function () {
 				alert("Erro ao remover usuário")
@@ -120,6 +125,7 @@ $(function(){
 			data:data,
 			success: function() {
 				alert("Usuário atualizado com sucesso");
+				location.reload();
 			},
 			error: function () {
 				alert("Erro ao atualizar usuário")
