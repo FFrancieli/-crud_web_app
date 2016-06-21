@@ -5,6 +5,13 @@ $(function(){
 		this.gender = gender;
 		this.email = email;
 	}
+	var User2 = function (id, name, gender, email) {
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.email = email;
+	}
+
 
 	var Crud = function() {
 
@@ -14,6 +21,7 @@ $(function(){
 		var template = Handlebars.compile(document.getElementById('users-template').innerHTML);
 		var new_user = this.createUser;
 		var remove_user = this.removeUser;
+		var update_user = this.updateUser;
 		var render = function(data) {
 			var user_list = {
 				users:data
@@ -31,6 +39,11 @@ $(function(){
 				var caller_id = event.target.id;
 				remove_user(getId(caller_id));
 			});
+
+			$(".update").click(function(event){
+				var caller_id = event.target.id;
+				update_user(getId(caller_id));
+			});
 		};
 
 		var getId = function (element_id) {
@@ -46,7 +59,7 @@ $(function(){
 
 	Crud.prototype.makeAjaxRequest = function(method, render, error, params) {
         $.ajax({
-            url: "http://localhost:8181/api/users" + (params? ("/" + params): ""),
+            url: "http://web-mobile.herokuapp.com/api/users/" + (params? ("/" + params): ""),
             method: method,
             success: function(data) {
                 render(data);
@@ -58,13 +71,13 @@ $(function(){
     }
 
 	Crud.prototype.createUser = function () {
-		var user = new User("Angélica ", "F", "test@gmail.com")
+		var user = new User(prompt("Name"),prompt("Gender"),prompt("Email"))
 		saveUser(user);
 	};
 
 	var saveUser = function(data) {
 			$.ajax({
-				url:"http://localhost:8181/api/users/",
+				url:"http://web-mobile.herokuapp.com/api/users/",
 				method: "POST",
 				data:data,
 				success: function() {
@@ -84,17 +97,32 @@ $(function(){
 	var remove = function (id) {
 
 		$.ajax({
-			url:"http://localhost:8181/api/users/" + "57671ef94430e45116a43b50" ,
-			headers: {'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
-			 'Access-Control-Allow-Origin': '*',
-			 'Access-Control-Allow-Headers': 'origin, x-requested-with, content-type'
-			},
+			url:"http://web-mobile.herokuapp.com/api/users/" + id,
 			method: "DELETE",
 			success: function() {
 				alert("Usuário removido com sucesso");
 			},
 			error: function () {
 				alert("Erro ao remover usuário")
+			}
+		});
+	}
+
+	Crud.prototype.updateUser = function (user_id) {
+		var user2 = new User2(user_id, prompt("Name"),prompt("Gender"),prompt("Email"))
+		update(user2);
+	};
+
+	var update = function (data) {
+		$.ajax({
+			url:"http://web-mobile.herokuapp.com/api/users/",
+			method: "PUT",
+			data:data,
+			success: function() {
+				alert("Usuário atualizado com sucesso");
+			},
+			error: function () {
+				alert("Erro ao atualizar usuário")
 			}
 		});
 	}
