@@ -27,10 +27,15 @@ $(function(){
     		new_user();
 			});
 
-			$(".remove").click(function(){
-				remove_user();
+			$(".remove").click(function(event){
+				var caller_id = event.target.id;
+				remove_user(getId(caller_id));
 			});
-		}
+		};
+
+		var getId = function (element_id) {
+			return document.getElementById(element_id).parentNode.parentNode.getAttribute('id');
+		};
 
 		var error = function(data) {
         console.dir(data);
@@ -72,13 +77,12 @@ $(function(){
 		});
 	};
 
-	Crud.prototype.removeUser = function () {
-		var user_id = "57671ef94430e45116a43b50";
+	Crud.prototype.removeUser = function (user_id) {
 		remove(user_id);
-		//this.makeAjaxRequest("DELETE", undefined, undefined, user_id)
 	};
 
 	var remove = function (id) {
+
 		$.ajax({
 			url:"http://localhost:8181/api/users/" + "57671ef94430e45116a43b50" ,
 			headers: {'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
